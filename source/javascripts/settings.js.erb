@@ -5,15 +5,12 @@ var MEME_SETTINGS = {
 
   // Universal font family for texts:
   // Note that you'll need to included quoted font names as you would in CSS, ie: '"Knockout 28 B"'.
-  fontFamily: 'Belizio Narrow SemiBold',
+  fontFamily: 'din-2014',
   // Font family options: set to empty array to disable font selector.
   // These options may also be formatted as {text:'Knockout', value:'"Knockout 28 B"'}.
   fontFamilyOpts: [
-      'Belizio Narrow SemiBold',
-      'Belizio Narrow Bold',
-      'LA Web Display Kis Bold',
-      'Benton Gothic Regular',
-      'Benton Gothic Bold',
+      {text: 'Din', value: "din-2014"},
+      'Jubilat',
       'Georgia'
   ],
 
@@ -27,11 +24,11 @@ var MEME_SETTINGS = {
   ],
 
   // Font color of main headline:
-  fontColor: '#fff',
+  fontColor: '#282D40',
   // Font color options
   fontColorOpts: [
     {text: 'White', value: '#fff'},
-    {text: 'Black', value: '#000'}
+    {text: 'Black', value: '#282D40'},
   ],
 
   headlineText: 'Write your own headline', // Default headline text.
@@ -56,7 +53,7 @@ var MEME_SETTINGS = {
     {text: 'Apple News square (iPad) [1104x1104]', value:"1104x1104"},
     // {text: 'Apple News square (iPad Pro) [1472x1472]', value:"1472x1472"},
     // Homepage
-    {text: 'Homepage [400x300]', value: "400x300"},
+    {text: 'Homepage [1160x773]', value: "1160x773"},
   ],
 
   imageScale: 1, // Background image scale.
@@ -64,17 +61,17 @@ var MEME_SETTINGS = {
   overlayAlpha: 0.5, // Opacity of image overlay.
 
   // Image background color, or blank ('') for no overlay:
-  backgroundColor: '#000',
+  backgroundColor: '#fff',
   // Background color options: set to empty array to disable background options selector. LAT colors below.
-  backgroundColorOpts: ['#fff','#4591B8', '#294F70','#DA1B28', '#000', ],
-  paddingRatio: 0.06, // Percentage of canvas width to use as edge padding.
+  backgroundColorOpts: ['#fff','#DC0228','#000', "#312B41",'#FE5C40', '#3571C0'],
+  paddingRatio: 0.05, // Percentage of canvas width to use as edge padding.
 
 
   // Image overlay color, or blank ('') for no overlay:
   overlayColor: '',
   // Overlay color options: set to empty array to disable overlay options selector.
   overlayColorOpts: ['#fff','#777', '#000',],
-  paddingRatio: 0.06, // Percentage of canvas width to use as edge padding.
+  paddingRatio: 0.05, // Percentage of canvas width to use as edge padding.
 
   // Text alignment: valid settings are "left", "center", and "right".
   textAlign: 'left',
@@ -88,20 +85,19 @@ var MEME_SETTINGS = {
   textShadow: false, // Text shadow toggle.
   textShadowEdit: true, // Toggles text shadow control within the editor.
   watermarkAlpha: 1, // Opacity of watermark image.
-  watermarkMaxWidthRatio: 0.20, // Maximum allowed width of watermark (percentage of total canvas width).
+  watermarkMaxWidthRatio: 0.15, // Maximum allowed width of watermark (percentage of total canvas width).
 
   // Path to the watermark image source, or blank for no watermark:
   // Alternatively, use '<%= asset_data_uri("vox.png") %>' to populate the watermark with base64 data, avoiding Cross-Origin issues.
-  watermarkSrc: '<%= image_path("lat2.png") %>',
+  watermarkSrc: '<%= image_path("politico-red.png") %>',
 
   // Watermark image options: set to empty array to disable watermark picker.
   // NOTE: only populate the "data" attributes with base64 data when concerned about Cross-Origin requests...
   // Otherwise, just leave "data" attributes blank and allow images to load from your server.
   watermarkOpts: [
-    {text: 'Wide white', value: '<%= image_path("lat2.png") %>', data: ''},
-    {text: 'Square white', value: '<%= image_path("lat.png") %>', data: ''},
-    {text: 'Wide black', value: '<%= image_path("lat2-black.png") %>', data: ''},
-    {text: 'Square black', value: '<%= image_path("lat-black.png") %>', data: ''},
+    {text: 'Red', value: '<%= image_path("politico-red.png") %>', data: ''},
+    {text: 'White', value: '<%= image_path("politico-white.png") %>', data: ''},
+    {text: 'Black', value: '<%= image_path("politico-black.png") %>', data: ''},
     {text: 'None', value: '', data:''}
   ],
 

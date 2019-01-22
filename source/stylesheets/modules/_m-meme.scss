@@ -2,7 +2,10 @@ $m: '.m-meme';
 
 body {
   margin: 0;
-  padding: 0 20px;
+}
+
+.meme-container {
+  max-width: 1200px;
 }
 
 #{$m} {

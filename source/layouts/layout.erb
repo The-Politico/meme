@@ -2,18 +2,30 @@
 <html>
   <head>
   <link href='https://fonts.googleapis.com/css?family=Press+Start+2P' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://use.typekit.net/dsx2uhv.css" />
+  <link rel="stylesheet" href="https://use.typekit.net/bvr3gvp.css" />
     <%= partial "partials/head" %>
+  <link href='https://unpkg.com/politico-style@3.0.5/docs/sketch/style.css' rel='stylesheet' type='text/css'>
   </head>
   <body class="<%= page_classes %>">
-    <div class="ricky">
-    <img class="rickroll" src="../../images/rickroll.jpg"> <h1>Los Angeles Times Meme Generator</h1>
-    </div>
-    <div class="clear"></div>
+    <nav class="global">
+      <div class="header-left bt-icon--house">
+        <a href="./../">
+          <svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+            <path d="M79.5,81.458h-57V41.27L51,16.729L79.5,41.27V81.458z M25.5,78.458h51V42.646L51,20.688L25.5,42.646V78.458z"></path>
+          </svg>
+        </a>
+      </div>
+      <b class="bt-icon bt-icon--politico"></b>
+      <span class="project-name">/ <a href="./">Social Image Generator</a></span>
+    </nav>
 
-    <div class="m-meme">
-      <%= partial "partials/editor" %>
-      <%= partial "partials/canvas" %>
-    </div>
+    <article class='meme-container'
+      <div class="m-meme">
+        <%= partial "partials/editor" %>
+        <%= partial "partials/canvas" %>
+      </div>
+    </article>
     <%= javascript_include_tag 'application' %>
     <%= javascript_include_tag 'settings' %>
   </body>

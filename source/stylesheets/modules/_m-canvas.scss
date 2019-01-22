@@ -6,10 +6,12 @@ $m: '.m-canvas';
   }
 
   #{$m}__canvas {
+    margin-bottom: 10px;
     background: #fcfcfc;
 
     canvas {
       max-width: 100% !important;
+      border: 1px dashed #666;
     }
   }
 

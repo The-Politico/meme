@@ -7,7 +7,7 @@ serve:
 	bundle exec middleman -p 4567
 
 upload:
-	aws s3 cp ./build s3://meme.latimes.com/ --recursive --acl=public-read
+	aws s3 cp ./build s3://staging.interactives.politico.com/interactives/2019/social-image-generator/ --recursive --acl=public-read
 
 ship:
 	make build
