@@ -1,19 +1,23 @@
-# Meme (Data Desk remix)
+# Meme (POLITICO remix)
 
 Meme is a generator that Vox Media uses to create social sharing images. See working version at [http://www.sbnation.com/a/meme](http://www.sbnation.com/a/meme).
 
-This is the Los Angeles Times Data Desk's fork. Here is what we added:
+This is the POLITICO fork of the Los Angeles Times Data Desk's fork.
+
+Here is what they added:
 
 - Options to change the image's aspect ratio
 - Options to set a solid background color
-- Los Angeles Times fonts
-- Los Angeles Times watermarks
 - Linebreaks allowed in the headlines
 - Deployment script to build static site inside newsroom VPN
 
-![screenshot](readme.png)
+Here is what we added:
+- POLITICO fonts
+- POLITICO watermarks
 
-How to deploy (at the LA Times)
+![screenshot](readme.jpg)
+
+How to deploy
 -------------------------------
 
 **Edit the ``source`` directory to make the changes you want**
@@ -31,6 +35,16 @@ Like so:
 ```bash
 $ make build
 ```
+
+Because we don't have a unique domain name for this project, you'll need to go into the built files and change the following paths by adding a `./` to the start.
+- index.html
+  - `./stylesheets/main-SOME-HASH.css`
+  - `./javascripts/application-SOME-HASH.js`
+  - `./javascripts/settings-SOME-HASH.js`
+
+- settings-SOME-HASH.js
+  - All `/images/...` to `./images/...`
+
 
 **Commit your work**
 
