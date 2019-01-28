@@ -62,5 +62,5 @@ $ git push origin master
 **Deploy your changes to Amazon S3**
 
 ```bash
-$ make ship
+$ make upload
 ```

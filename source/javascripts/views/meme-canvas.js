@@ -4,7 +4,7 @@
 */
 MEME.MemeCanvasView = Backbone.View.extend({
 
-  initialize: function() {
+  initialize: function () {
     var canvas = document.createElement('canvas');
     var $container = MEME.$('#meme-canvas');
 
@@ -22,14 +22,14 @@ MEME.MemeCanvasView = Backbone.View.extend({
     this.listenTo(this.model, 'change', this.render);
   },
 
-  setDownload: function() {
+  setDownload: function () {
     var a = document.createElement('a');
-    if (typeof a.download == 'undefined') {
+    if (typeof a.download === 'undefined') {
       this.$el.append('<p class="m-canvas__download-note">Right-click button and select "Download Linked File..." to save image.</p>');
     }
   },
 
-  render: function() {
+  render: function () {
     // Return early if there is no valid canvas to render:
     if (!this.canvas) return;
 
@@ -44,7 +44,7 @@ MEME.MemeCanvasView = Backbone.View.extend({
     this.canvas.height = d.height;
     ctx.clearRect(0, 0, d.width, d.height);
 
-    function renderBackground(ctx) {
+    function renderBackground (ctx) {
       // Base height and width:
       var bh = m.background.height;
       var bw = m.background.width;
@@ -57,13 +57,13 @@ MEME.MemeCanvasView = Backbone.View.extend({
         var cx = d.backgroundPosition.x || d.width / 2;
         var cy = d.backgroundPosition.y || d.height / 2;
 
-        ctx.drawImage(m.background, 0, 0, bw, bh, cx-(tw/2), cy-(th/2), tw, th);
+        ctx.drawImage(m.background, 0, 0, bw, bh, cx - (tw / 2), cy - (th / 2), tw, th);
       }
     }
 
-    function renderBackgroundColor(ctx) {
+    function renderBackgroundColor (ctx) {
       /* If a background image is set, we want to quit out right away */
-      if (m.background.height>0) {
+      if (m.background.height > 0) {
         return false;
       }
       /* Otherwise set the fill color */
@@ -73,7 +73,7 @@ MEME.MemeCanvasView = Backbone.View.extend({
       }
     }
 
-    function renderOverlay(ctx) {
+    function renderOverlay (ctx) {
       if (d.overlayColor) {
         ctx.save();
         ctx.globalAlpha = d.overlayAlpha;
@@ -84,18 +84,18 @@ MEME.MemeCanvasView = Backbone.View.extend({
       }
     }
 
-    function renderHeadline(ctx) {
+    function renderHeadline (ctx) {
       var maxWidth = Math.round(d.width * 0.75);
       var x = padding;
       var y = padding;
 
-      ctx.font = d.fontSize +'pt '+ d.fontFamily;
+      ctx.font = d.fontSize + 'pt ' + d.fontFamily;
       ctx.fillStyle = d.fontColor;
       ctx.textBaseline = 'top';
 
       // Text shadow:
       if (d.textShadow) {
-        ctx.shadowColor = "#666";
+        ctx.shadowColor = '#666';
         ctx.shadowOffsetX = -2;
         ctx.shadowOffsetY = 1;
         ctx.shadowBlur = 10;
@@ -107,7 +107,7 @@ MEME.MemeCanvasView = Backbone.View.extend({
         x = d.width / 2;
         y = d.height - d.height / 1.75;
         maxWidth = d.width - d.width / 3;
-      } else if (d.textAlign == 'right' ) {
+      } else if (d.textAlign == 'right') {
         ctx.textAlign = 'right';
         x = d.width - padding;
       } else {
@@ -119,55 +119,55 @@ MEME.MemeCanvasView = Backbone.View.extend({
 
       /* Clear out any empty strings that have snuck in */
       var words = _.filter(
-          words, function(e){ return e != "" }
+        words, function (e) { return e != ''; }
       );
 
       /* Allow linebreaks by catching newlines and sticking them back in list */
       var linebreak = /\r|\n/;
       var wordsAndBreaks = [];
-      _.each(words, function(bit) {
-            if (linebreak.exec(bit)) {
-                var split = bit.split(linebreak);
-                _.each(split, function(element, index) {
-                    wordsAndBreaks.push(element);
-                    if (index+1 != split.length) {
-                        wordsAndBreaks.push("\n");
-                    }
-                })
-            } else {
-                wordsAndBreaks.push(bit);
+      _.each(words, function (bit) {
+        if (linebreak.exec(bit)) {
+          var split = bit.split(linebreak);
+          _.each(split, function (element, index) {
+            wordsAndBreaks.push(element);
+            if (index + 1 != split.length) {
+              wordsAndBreaks.push('\n');
             }
+          });
+        } else {
+          wordsAndBreaks.push(bit);
+        }
       });
 
       /* Clear out any empty strings that have snuck in */
       var wordsAndBreaks = _.filter(
-          wordsAndBreaks, function(e){ return e != "" }
+        wordsAndBreaks, function (e) { return e != ''; }
       );
 
-      var line  = '';
-      _.each(wordsAndBreaks, function(bit, index) {
-            if (bit == "\n") {
-                ctx.fillText(line, x, y);
-                line = '';
-                y += Math.round(d.fontSize * lineheight);
-            } else {
-                var testLine  = line + bit + ' ';
-                var metrics   = ctx.measureText(testLine);
-                var testWidth = metrics.width;
-                if (testWidth > maxWidth && index > 0) {
-                  ctx.fillText(line, x, y);
-                  line = bit + ' ';
-                  y += Math.round(d.fontSize * lineheight);
-                } else {
-                  line = testLine;
-                }
-            }
+      var line = '';
+      _.each(wordsAndBreaks, function (bit, index) {
+        if (bit == '\n') {
+          ctx.fillText(line, x, y);
+          line = '';
+          y += Math.round(d.fontSize * lineheight);
+        } else {
+          var testLine = line + bit + ' ';
+          var metrics = ctx.measureText(testLine);
+          var testWidth = metrics.width;
+          if (testWidth > maxWidth && index > 0) {
+            ctx.fillText(line, x, y);
+            line = bit + ' ';
+            y += Math.round(d.fontSize * lineheight);
+          } else {
+            line = testLine;
+          }
+        }
       });
       ctx.fillText(line, x, y);
       ctx.shadowColor = 'transparent';
     }
 
-    function renderCredit(ctx) {
+    function renderCredit (ctx) {
       ctx.textBaseline = 'bottom';
       ctx.textAlign = 'left';
       ctx.fillStyle = d.fontColor;
@@ -175,7 +175,7 @@ MEME.MemeCanvasView = Backbone.View.extend({
       ctx.fillText(d.creditText, padding, d.height - padding);
     }
 
-    function renderWatermark(ctx) {
+    function renderWatermark (ctx) {
       // Base & transformed height and width:
       var bw, bh, tw, th;
       bh = th = m.watermark.height;
@@ -192,7 +192,9 @@ MEME.MemeCanvasView = Backbone.View.extend({
         }
 
         ctx.globalAlpha = d.watermarkAlpha;
-        ctx.drawImage(m.watermark, 0, 0, bw, bh, d.width-padding-tw, d.height-padding-th, tw, th);
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'high';
+        ctx.drawImage(m.watermark, 0, 0, bw, bh, d.width - padding - tw, d.height - padding - th, tw, th);
         ctx.globalAlpha = 1;
       }
     }
@@ -204,10 +206,10 @@ MEME.MemeCanvasView = Backbone.View.extend({
     renderCredit(ctx);
     renderWatermark(ctx);
 
-    var data = this.canvas.toDataURL(); //.replace('image/png', 'image/octet-stream');
+    var data = this.canvas.toDataURL(); // .replace('image/png', 'image/octet-stream');
     this.$('#meme-download').attr({
       'href': data,
-      'download': (d.downloadName || 'share') + '.png'
+      'download': (d.downloadName || 'share') + '.png',
     });
 
     // Enable drag cursor while canvas has artwork:
@@ -215,11 +217,11 @@ MEME.MemeCanvasView = Backbone.View.extend({
   },
 
   events: {
-    'mousedown canvas': 'onDrag'
+    'mousedown canvas': 'onDrag',
   },
 
   // Performs drag-and-drop on the background image placement:
-  onDrag: function(evt) {
+  onDrag: function (evt) {
     evt.preventDefault();
 
     // Return early if there is no background image:
@@ -236,20 +238,20 @@ MEME.MemeCanvasView = Backbone.View.extend({
     start.y = start.y || d.height / 2;
 
     // Create update function with draggable constraints:
-    function update(evt) {
+    function update (evt) {
       evt.preventDefault();
       model.set('backgroundPosition', {
-        x: Math.max(d.width-iw, Math.min(start.x - (origin.x - evt.clientX), iw)),
-        y: Math.max(d.height-ih, Math.min(start.y - (origin.y - evt.clientY), ih))
+        x: Math.max(d.width - iw, Math.min(start.x - (origin.x - evt.clientX), iw)),
+        y: Math.max(d.height - ih, Math.min(start.y - (origin.y - evt.clientY), ih)),
       });
     }
 
     // Perform drag sequence:
     var $doc = MEME.$(document)
       .on('mousemove.drag', update)
-      .on('mouseup.drag', function(evt) {
+      .on('mouseup.drag', function (evt) {
         $doc.off('mouseup.drag mousemove.drag');
         update(evt);
       });
-  }
+  },
 });
